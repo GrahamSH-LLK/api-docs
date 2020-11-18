@@ -8,6 +8,9 @@
             
     },
     "search": [true],
+    "logo": {
+      "src": "https://scratchaddons.com/assets/images/icon.svg"
+    },
     "menu": {                       
             "Scratch Addons Home": {
                 "href":"https://scratchaddons.com",

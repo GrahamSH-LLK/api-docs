@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>background/Addon.js - Documentation</title>
     
     
     <meta property="og:title" content="Scratch Addons API Docs"/>
@@ -43,37 +43,78 @@
 
 <div id="main">
     
+    <h1 class="page-title">background/Addon.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Auth from "../common/Auth.js";
+import Account from "../common/Account.js";
+import fetch from "../common/fetch.js";
+import Notifications from "./Notifications.js";
+import Badge from "./Badge.js";
+import Settings from "../common/Settings.js";
 
-
-    <section class="package">
-        <h3> </h3>		
+export default class Addon {
+  /**
+   * Creates an instance of Addon.
+   * @param {*} info
+   * @memberof Addon
+   */
+  constructor(info) {
+    const { id, permissions } = info;
+    this._timeouts = [];
+    this._intervals = [];
+    const that = this;
+    this.self = {
+      id,
+      dir: `${chrome.runtime.getURL("")}addons/${id}`,
+      browser: typeof InstallTrigger !== "undefined" ? "firefox" : "chrome",
+      restart() {
+        return that._restart();
+      },
+    };
+    /**
+     * @todo Write the documentation.
+     */
+    this.auth = new Auth(this);
+    /**
+     * @todo Write the documentation.
+     */
+    this.account = new Account();
+    /**
+     * @todo Write the documentation.
+     */
+    this.fetch = fetch;
+    /**
+     * @todo Write the documentation.
+     */
+    this.settings = new Settings(this);
+    if (permissions) {
+      if (permissions.includes("notifications")) this.notifications = new Notifications(this);
+      if (permissions.includes("badge")) this.badge = new Badge(this);
+    }
+  }
+  /**
+   * @todo Write the documentation.
+   */
+  _kill() {
+    this.auth._removeEventListeners();
+    this.settings._removeEventListeners();
+    if (this.notifications) this.notifications._removeEventListeners();
+    this._timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+    this._intervals.forEach((intervalId) => clearInterval(intervalId));
+    this._revokeProxy();
+  }
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><p><img src="https://raw.githubusercontent.com/ScratchAddons/ScratchAddons/master/images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img></p>
-<h1>Welcome To The Scratch Addons API Docs!</h1>
-<p>Use the sidebar to navigate our Addon API docs, or use the search bar to find something! These docs are still under development, so some things might be missing.</p></article>
-    </section>
-
-
 
 
 

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>common/Settings.js - Documentation</title>
     
     
     <meta property="og:title" content="Scratch Addons API Docs"/>
@@ -43,37 +43,44 @@
 
 <div id="main">
     
+    <h1 class="page-title">common/Settings.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export default class Settings extends EventTarget {
+  constructor(addonObject) {
+    super();
+    this._addonId = addonObject.self.id;
+    scratchAddons.eventTargets.settings.push(this);
+  }
+  /**
+   *
+   * @todo Document
+   * @memberof Settings
+   */
+  get(optionName) {
+    const settingsObj = scratchAddons.globalState.addonSettings[this._addonId] || {};
+    const value = settingsObj[optionName];
+    if (value === undefined) throw "ScratchAddons exception: invalid setting ID";
+    else return value;
+  }
 
-
-    <section class="package">
-        <h3> </h3>		
+  _removeEventListeners() {
+    scratchAddons.eventTargets.settings.splice(
+      scratchAddons.eventTargets.settings.findIndex((x) => x === this),
+      1
+    );
+  }
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><p><img src="https://raw.githubusercontent.com/ScratchAddons/ScratchAddons/master/images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img></p>
-<h1>Welcome To The Scratch Addons API Docs!</h1>
-<p>Use the sidebar to navigate our Addon API docs, or use the search bar to find something! These docs are still under development, so some things might be missing.</p></article>
-    </section>
-
-
 
 
 

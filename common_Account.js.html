@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>common/Account.js - Documentation</title>
     
     
     <meta property="og:title" content="Scratch Addons API Docs"/>
@@ -43,37 +43,56 @@
 
 <div id="main">
     
+    <h1 class="page-title">common/Account.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @todo Should this be an event target?
+ */
+export default class Account extends EventTarget {
+  constructor() {
+    super();
+  }
 
-
-    <section class="package">
-        <h3> </h3>		
+  /**
+   *
+   *
+   * @return {*}
+   * @memberof Account
+   */
+  getMsgCount() {
+    return scratchAddons.methods.getMsgCount();
+  }
+  /**
+   *
+   *
+   * @param {*} args
+   * @return {*}
+   * @memberof Account
+   */
+  getMessages(...args) {
+    return scratchAddons.methods.getMessages(...args);
+  }
+  /**
+   *
+   *
+   * @return {*}
+   * @memberof Account
+   */
+  clearMessages() {
+    return scratchAddons.methods.clearMessages();
+  }
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><p><img src="https://raw.githubusercontent.com/ScratchAddons/ScratchAddons/master/images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img></p>
-<h1>Welcome To The Scratch Addons API Docs!</h1>
-<p>Use the sidebar to navigate our Addon API docs, or use the search bar to find something! These docs are still under development, so some things might be missing.</p></article>
-    </section>
-
-
 
 
 

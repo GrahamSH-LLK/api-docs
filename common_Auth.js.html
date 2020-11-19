@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>common/Auth.js - Documentation</title>
     
     
     <meta property="og:title" content="Scratch Addons API Docs"/>
@@ -43,37 +43,70 @@
 
 <div id="main">
     
+    <h1 class="page-title">common/Auth.js</h1>
+    
 
     
 
 
 
     
-
-
-    <section class="package">
-        <h3> </h3>		
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export default class Auth extends EventTarget {
+  constructor(addonObject) {
+    super();
+    scratchAddons.eventTargets.auth.push(this);
+  }
+  /**
+   * @return {boolean} Whether the user is logged in or not
+   */
+  get isLoggedIn() {
+    return scratchAddons.globalState.auth.isLoggedIn;
+  }
+  /**
+   * @return {string} The username of the currently logged in user
+   */
+  get username() {
+    return scratchAddons.globalState.auth.username;
+  }
+  /**
+   * @return {string} The user ID of the currently logged in user.
+   */
+  get userId() {
+    return scratchAddons.globalState.auth.userId;
+  }
+  /**
+   * @return {string} The value of the X-Token header used in the Scratch REST API.
+   */
+  get xToken() {
+    return scratchAddons.globalState.auth.xToken;
+  }
+  /**
+   * @return {string} The value of the scratchcsrftoken cookie.
+   */
+  get csrfToken() {
+    return scratchAddons.globalState.auth.csrfToken;
+  }
+  /**
+   * @return {string} The language code for the language choice the user has made in Scratch, for example. "en".
+   */
+  get scratchLang() {
+    return scratchAddons.globalState.auth.scratchLang;
+  }
+  /**
+   * @todo Write the documentation.
+   */
+  _removeEventListeners() {
+    scratchAddons.eventTargets.auth.splice(
+      scratchAddons.eventTargets.auth.findIndex((x) => x === this),
+      1
+    );
+  }
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><p><img src="https://raw.githubusercontent.com/ScratchAddons/ScratchAddons/master/images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img></p>
-<h1>Welcome To The Scratch Addons API Docs!</h1>
-<p>Use the sidebar to navigate our Addon API docs, or use the search bar to find something! These docs are still under development, so some things might be missing.</p></article>
-    </section>
-
-
 
 
 
